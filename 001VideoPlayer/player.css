@@ -1,0 +1,44 @@
+body {
+  background-color:#333;
+}
+
+h2 {
+  margin-top: 30px;
+  margin-left:20px;
+  color: white;
+}
+
+@media screen and (max-width: 1024px) {
+  .media-container {
+    float: left;
+  };
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 2048px) {
+  .media-container {
+    display: inline;
+  };
+}
+
+.media-player {
+	float:left;
+	padding:1em 1em;
+  height: 700px;
+}
+
+.media-player-list {
+	padding:1em 1em;
+  height: 700px;
+}
+
+video {
+	background:#000;
+}
+
+#video-like {
+  margin-left: 5px;
+}
+
+#video-unlike {
+  margin-left: 5px;
+}

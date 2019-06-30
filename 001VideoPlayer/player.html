@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player Plus on HTML5</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+    <link href="player.css" rel="stylesheet" />
+  </head>
+<body>
+  <h2>Video Player Plus on HTML5</h2>
+  <div class="media-container">
+    <div class="media-player" id="media-player">
+        <div style="display: block">
+        <video id="media-video">
+        <source src="http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4" >
+        </video>
+        </div>
+        <div style="display: inline">
+        <div class="progress">
+            <div id="progress-bar" class="progress-bar bg-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+        </div>
+        </div>
+        <div id="media-controls" class="mt-4">
+        <button id="play-button" class="btn btn-dark"><i class="fa fa-play"></i></button>
+        <button id="play-pause-button" class="btn btn-dark"><i class="fa fa-pause"></i></button>
+        <button id="volume-up-button" class="btn btn-dark"><i class="fa fa-plus"></i></button>
+        <button id="volume-down-button" class="btn btn-dark"><i class="fa fa-minus"></i></button>
+        <button id="stop-button" class="btn btn-dark"><i class="fa fa-stop"></i></button>
+        <button id="mute-button" class="btn btn-dark"><i id="mute-icon" class="fas fa-volume-down"></i></button>
+        <button id="like-button" class="btn btn-dark"><i class="far fa-thumbs-up"></i><span id="video-like"></span></button>
+        <button id="unlike-button" class="btn btn-dark"><i class="far fa-thumbs-down"></i><span id="video-unlike"></span></button>
+        <button class="btn btn-dark" disabled>volume<span id='video-volume' style="color: white; margin-left: 10px;"></span></button>
+        </div>
+    </div>
+    <div class="media-player-list">
+        <h2>Play list</h2>
+        <ul class="list-group list-group-flush">
+            <li id="video1" class="list-group-item" title="http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4"><i class="fas fa-video" style="margin-right: 2em;"></i>Iron man</li>
+            <li id="video2" class="list-group-item" title="http://vfx.mtime.cn/Video/2019/03/18/mp4/190318214226685784.mp4"><i class="fas fa-video" style="margin-right: 2em;"></i>About drags</li>
+            <li id="video3" class="list-group-item" title="http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4"><i class="fas fa-video" style="margin-right: 2em;"></i>ToyStory</li>
+        </ul>
+    </div>
+  </div>
+</body>
+<script src="player.js"></script>
+</html>
