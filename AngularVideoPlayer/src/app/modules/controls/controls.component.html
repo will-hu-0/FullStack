@@ -1,3 +1,39 @@
-<p>
-  controls works!
-</p>
+<div style="display: inline;">
+  <div class="progress">
+      <div id="progress-bar" class="progress-bar bg-dark" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+  </div>
+</div>
+<div id="media-controls">
+  <button [disabled]="playerInstance.isPlaying" id="play-button" class="btn btn-dark" (click)="onPlay()">
+    <i class="fa fa-play"></i>
+  </button>
+  <button [disabled]="!playerInstance.isPlaying" id="play-pause-button" class="btn btn-dark" (click)="onPause()">
+    <i class="fa fa-pause"></i>
+  </button>
+  <button id="volume-up-button" class="btn btn-dark" (click)="onVolumeUp()">
+    <i class="fa fa-plus"></i>
+  </button>
+  <button id="volume-down-button" class="btn btn-dark" (click)="onVolumeDown()">
+    <i class="fa fa-minus"></i>
+  </button>
+  <button id="stop-button" class="btn btn-dark" (click)="onStop()">
+    <i class="fa fa-stop"></i>
+  </button>
+  <button *ngIf="!playerInstance.isMuted" id="mute-button" class="btn btn-dark" (click)="onMute()">
+    <i id="mute-icon" class="fas fa-volume-down"></i>
+  </button>
+  <button *ngIf="playerInstance.isMuted" id="mute-button" class="btn btn-dark" (click)="onUnMute()">
+    <i id="mute-icon" class="fas fa-volume-mute"></i>
+  </button>
+  <button id="like-button" class="btn btn-dark">
+    <i class="far fa-thumbs-up"></i><span id="video-like"></span>
+  </button>
+  <button id="unlike-button" class="btn btn-dark">
+    <i class="far fa-thumbs-down"></i><span id="video-unlike"></span>
+  </button>
+  <button class="btn btn-dark" disabled>
+    volume<span id='video-volume' style="color: white; margin-left: 10px;">
+      {{ playerInstance.volumeDisplay }}
+    </span>
+  </button>
+</div>
