@@ -22,7 +22,16 @@ export class VideoService {
     return this.http.get<Video[]>(Constants.VIDEO_URL)
       .pipe(
         tap(_ => console.log('Got vidoes')),
-        catchError(this.handleError<Video[]>('getHeroes', []))
+        catchError(this.handleError<Video[]>('getVideos', []))
+      );
+  }
+
+  public getVideo(id: number): Observable<Video> {
+    const url = `${Constants.VIDEO_URL}/${id}`;
+    return this.http.get<Video>(url)
+      .pipe(
+        tap(_ => console.log(`Got vidoes id=${id}`)),
+        catchError(this.handleError<Video>('getVideo'))
       );
   }
 

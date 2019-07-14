@@ -25,14 +25,16 @@
   <button *ngIf="playerInstance.isMuted" id="mute-button" class="btn btn-dark" (click)="onUnMute()">
     <i id="mute-icon" class="fas fa-volume-mute"></i>
   </button>
-  <button id="like-button" class="btn btn-dark">
-    <i class="far fa-thumbs-up"></i><span id="video-like"></span>
+  <button class="btn btn-dark" (click)="onLike()">
+    <i class="far fa-thumbs-up"></i>
+    <span style="margin-left: 5px" >{{ currentPlayingVideo.like }}</span>
   </button>
-  <button id="unlike-button" class="btn btn-dark">
-    <i class="far fa-thumbs-down"></i><span id="video-unlike"></span>
+  <button class="btn btn-dark" (click)="onUnlike()">
+    <i class="far fa-thumbs-down"></i>
+    <span style="margin-left: 5px">{{ currentPlayingVideo.unlike }}</span>
   </button>
   <button class="btn btn-dark" disabled>
-    volume<span id='video-volume' style="color: white; margin-left: 10px;">
+    volume<span style="color: white; margin-left: 10px;">
       {{ playerInstance.volumeDisplay }}
     </span>
   </button>

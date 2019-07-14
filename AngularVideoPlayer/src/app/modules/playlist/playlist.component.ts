@@ -26,7 +26,9 @@ export class PlaylistComponent implements OnInit {
   }
 
   onPlay(video: Video) {
-    this.playerService.switchVideoEvent.emit(video);
+    this.videoService.getVideo(video.id).subscribe(
+      respVideo => this.playerService.switchVideoEvent.emit(respVideo)
+    );
   }
 
 }

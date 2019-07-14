@@ -58,7 +58,9 @@ export class ManagementComponent implements OnInit {
     const newVideo: Video = {
       id: Number(this.getFormValue('id')),
       title: this.getFormValue('title'),
-      url: this.getFormValue('url')
+      url: this.getFormValue('url'),
+      like: 0,
+      unlike: 0
     };
     this.videoService.addVideo(newVideo).subscribe(
       () => this.loadVideos()

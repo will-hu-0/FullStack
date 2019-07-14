@@ -15,6 +15,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   private siwtchVideoEventSubscribe: Subscription;
 
   public videoSourceUrl = 'http://vjs.zencdn.net/v/oceans.mp4';  // Default URL
+  public currentPlayingVideo: Video = new Video();
 
   constructor(
     private el: ElementRef,
@@ -58,6 +59,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.siwtchVideoEventSubscribe = this.playerService.switchVideoEvent.subscribe((video: Video) => {
       this.handleSwitchVideoEvent(video);
     });
+
   }
 
   ngOnDestroy() {
@@ -79,6 +81,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
   private handleSwitchVideoEvent(video: Video) {
+    this.currentPlayingVideo = video;
     this.playerService.VideoPlayer.src = video.url;
     this.handleStopEvent();
     this.playerService.VideoPlayer.play();

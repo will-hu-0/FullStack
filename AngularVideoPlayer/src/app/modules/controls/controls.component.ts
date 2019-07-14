@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, OnDestroy } from '@angular/core';
 import { PlayerEvent, VideoPlayer } from 'src/app/models/player.model';
 import { PlayerService } from 'src/app/services/player.service';
 import { Subscription } from 'rxjs';
+import { Video } from 'src/app/models/video.model';
+import { VideoService } from 'src/app/services/video.service';
 
 @Component({
   selector: 'app-controls',
@@ -11,14 +13,20 @@ import { Subscription } from 'rxjs';
 export class ControlsComponent implements OnInit, OnDestroy {
 
   public playerInstance: VideoPlayer;
+  // Set up default Video, will be overrided by loadFirstVideo()
+  public currentPlayingVideo: Video = new Video();
   private videoPercentageUpdateEventSubscribe: Subscription;
+  private siwtchVideoEventSubscribe: Subscription;
 
   constructor(
     private el: ElementRef,
-    private playerService: PlayerService
+    private playerService: PlayerService,
+    private videoService: VideoService,
   ) { }
 
   ngOnInit() {
+    this.loadFirstVideo();
+
     this.playerInstance = this.playerService.VideoPlayer;
     this.playerInstance.volumeDisplay = '100%'; // Default volume
 
@@ -29,10 +37,26 @@ export class ControlsComponent implements OnInit, OnDestroy {
       progressBar.setAttribute('aria-valuenow', percentage);
       progressBar.innerHTML = percentage + '% played';
     });
+
+    // Subscribe the SwitchVideoEvent to set up number of `like` & `unlike`
+    this.siwtchVideoEventSubscribe = this.playerService.switchVideoEvent.subscribe((video: Video) => {
+      this.currentPlayingVideo = video;
+    });
+  }
+
+  private loadFirstVideo() {
+    this.videoService.getVideos().subscribe(
+      (videos: Video[]) => {
+        if (videos.length > 0) {
+          this.currentPlayingVideo = videos[0];
+          this.playerService.switchVideoEvent.emit(videos[0]);  // Start to play
+        }
+      });
   }
 
   ngOnDestroy() {
     this.videoPercentageUpdateEventSubscribe.unsubscribe();
+    this.siwtchVideoEventSubscribe.unsubscribe();
   }
 
   onPlay() {
@@ -58,6 +82,20 @@ export class ControlsComponent implements OnInit, OnDestroy {
   onStop() {
     this.playerService.controlEvents.emit(PlayerEvent.STOP);
     this.playerInstance.isPlaying = false;
+  }
+
+  onLike() {
+    this.currentPlayingVideo.like += 1;
+    this.videoService.updateVideo(this.currentPlayingVideo).subscribe(
+      (video) => this.currentPlayingVideo.like = video.like
+    );
+  }
+
+  onUnlike() {
+    this.currentPlayingVideo.unlike += 1;
+    this.videoService.updateVideo(this.currentPlayingVideo).subscribe(
+      (video) => this.currentPlayingVideo.unlike = video.unlike
+    );
   }
 
   onVolumeUp() {
