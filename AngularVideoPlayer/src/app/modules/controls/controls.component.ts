@@ -20,6 +20,8 @@ export class ControlsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.playerInstance = this.playerService.VideoPlayer;
+    this.playerInstance.volumeDisplay = '100%'; // Default volume
+
     this.videoPercentageUpdateEventSubscribe = this.playerService.videoPercentageUpdateEvent
     .subscribe((percentage: number) => {
       const progressBar = this.el.nativeElement.querySelector('#progress-bar');

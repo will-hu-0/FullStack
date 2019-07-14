@@ -19,6 +19,7 @@ export class VideoPlayer {
   volume = 1;
   currentTime = 0;
   duration = 0;
+  src = '';
 
   play(): void {}
   pause(): void {}

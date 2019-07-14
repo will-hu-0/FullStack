@@ -1,5 +1,6 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { PlayerEvent, VideoPlayer } from '../models/player.model';
+import { Video } from '../models/video.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,11 @@ export class PlayerService {
    * Handling percentage update event during playing video.
    */
   @Output() videoPercentageUpdateEvent: EventEmitter<number> = new EventEmitter();
+
+  /**
+   * Handling switching video event
+   */
+  @Output() switchVideoEvent: EventEmitter<Video> = new EventEmitter();
 
   constructor() { }
 
@@ -38,14 +44,6 @@ export class PlayerService {
 
   public get VolumeDisplay(): string {
     return this.videoPlayer.volume * 100 + '%';
-  }
-
-  public timeUpdate(progressBar): void {
-    console.log(this.videoPlayer.currentTime);
-    // const percentage = Math.floor((100 / this.videoPlayer.duration) * this.videoPlayer.currentTime);
-    // progressBar.setAttribute('style', 'width: ' + percentage + '%;');
-    // progressBar.setAttribute('aria-valuenow', percentage);
-    // progressBar.innerHTML = percentage + '% played';
   }
 
 }

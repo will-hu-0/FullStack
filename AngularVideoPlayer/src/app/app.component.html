@@ -1,3 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['player']" [routerLinkActive]="['active']">Player</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['management']" [routerLinkActive]="['active']">Management</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 <div class="container">
   <router-outlet></router-outlet>
 </div>

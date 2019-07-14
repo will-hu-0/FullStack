@@ -58,7 +58,6 @@ window.onload = function() {
     }
     videoPlayer.volume = videoPlayer.volume - 0.1;
     videoPlayer.volume = parseFloat(videoPlayer.volume).toFixed(1);
-    console.log(videoPlayer.volume);
     volume.innerText = videoPlayer.volume * 100 + '%';
   });  
 

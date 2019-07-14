@@ -1,3 +1,9 @@
-<p>
-  playlist works!
-</p>
+<div class="media-player-list">
+  <h2>Play list</h2>
+  <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngFor="let video of videos;" (click)="onPlay(video)">
+          <i class="fas fa-video" style="margin-right: 2em;"></i>
+          {{video.title}}
+      </li>
+  </ul>
+</div>

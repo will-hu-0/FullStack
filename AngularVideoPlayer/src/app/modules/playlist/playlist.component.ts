@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Video } from 'src/app/models/video.model';
+import { VideoService } from 'src/app/services/video.service';
+import { PlayerService } from 'src/app/services/player.service';
 
 @Component({
   selector: 'app-playlist',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaylistComponent implements OnInit {
 
-  constructor() { }
+  public videos: Video[];
+  constructor(
+    private videoService: VideoService,
+    private playerService: PlayerService) { }
 
   ngOnInit() {
+    this.loadVideos();
+  }
+
+  private loadVideos() {
+    this.videoService.getVideos().subscribe(
+      videos => this.videos = videos
+    );
+  }
+
+  onPlay(video: Video) {
+    this.playerService.switchVideoEvent.emit(video);
   }
 
 }

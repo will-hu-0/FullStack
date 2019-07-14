@@ -1,0 +1,82 @@
+<h2>Add new video</h2>
+<div class="row">
+  <div class="col-lg-6 mt-2">
+    <form [formGroup]="addVideoFormGroup" (ngSubmit)="addNewVideo()">
+      <div class="form-group">
+        <label style="color: white">ID:</label>
+        <input type="text" class="form-control" formControlName="id" placeholder="Enter ID">
+      </div>  
+      <div class="form-group">
+        <label style="color: white">Title:</label>
+        <input type="text" class="form-control" formControlName="title" placeholder="Enter Title">
+      </div>
+      <div class="form-group">
+        <label style="color: white">Youtube URL:</label>
+        <input type="url" class="form-control" formControlName="url" placeholder="Enter URL">
+      </div>
+      <button type="submit" class="btn btn-primary">Add Video</button>
+    </form>
+  </div>
+</div>
+
+<h2>Edit video</h2>
+<ngx-datatable class='material' [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+  [limit]="10" [rows]='videos'>
+  <ngx-datatable-column [resizeable]="false" [width]="45" [sortable]="true" name="name">
+    <ng-template let-column="column" ngx-datatable-header-template>
+      S.no
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      {{row.id}}
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column [resizeable]="false" [width]="100" >
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Title
+    </ng-template>
+    <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+      <div *ngIf="isEditable[rowIndex]">
+          <input class="form-control" type="text" [(ngModel)]="row.title" [disabled]="!isEditable[rowIndex]">  
+      </div>
+      <div *ngIf="!isEditable[rowIndex]">
+        {{row.title}}
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column [resizeable]="false" [width]="500" >
+    <ng-template let-column="column" ngx-datatable-header-template>
+      URL
+    </ng-template>
+    <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+      <div *ngIf="isEditable[rowIndex]">
+          <input class="form-control" type="text" [(ngModel)]="row.url" [disabled]="!isEditable[rowIndex]">  
+      </div>
+      <div *ngIf="!isEditable[rowIndex]">
+        {{row.url}}
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column [resizeable]="false" [width]="300" >
+    <ng-template let-column="column" ngx-datatable-header-template>
+      Action
+    </ng-template>
+    <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+      <div class="actions-container">
+        <div class="action">
+          <button class="btn btn-dark" (click)="this.isEditable[rowIndex]=!this.isEditable[rowIndex]"
+          [disabled]="isEditable[rowIndex]">
+            Edit</button>
+        </div>
+        <div class="action">
+          <button class="btn btn-danger" (click)="delete(row, rowIndex);">Delete</button>
+        </div>
+        <div class="action">
+          <button class="btn btn-primary" (click)="save(row, rowIndex);" [disabled]="!isEditable[rowIndex]">
+            Approve</button>
+        </div>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>
+
+
