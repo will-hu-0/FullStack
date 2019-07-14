@@ -2,6 +2,8 @@
 
 The Angualr project for Video Player
 
+Git: https://github.com/keenkit/FullStack/tree/master/AngularVideoPlayer
+
 # How to run?
 
 ```
