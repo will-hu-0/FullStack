@@ -10,7 +10,7 @@ export enum PlayerEvent {
 }
 
 export class VideoPlayer {
-  isMuted = false;
+  isMuted = true;
   isPlaying = false;
 
   volumeDisplay = '100%';

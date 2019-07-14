@@ -35,6 +35,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.controlEventsSubscribe = this.playerService.controlEvents.subscribe((event: PlayerEvent) => {
     switch (event) {
       case PlayerEvent.PLAY:
+        // Need to set to `muted` for autoplaying, otherwise will throw error.
+        // See more from
+        // https://stackoverflow.com/questions/40276718/how-to-handle-uncaught-in-promise-domexception-the-play-request-was-interru
+        this.playerService.VideoPlayer.muted = true;
         this.playerService.VideoPlayer.play();
         break;
 
@@ -84,7 +88,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.currentPlayingVideo = video;
     this.playerService.VideoPlayer.src = video.url;
     this.handleStopEvent();
-    this.playerService.VideoPlayer.play();
+    this.playerService.controlEvents.emit(PlayerEvent.PLAY);
     this.playerService.VideoPlayer.isPlaying = true;  // For buttons style
   }
 

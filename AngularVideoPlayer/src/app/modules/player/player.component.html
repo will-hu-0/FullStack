@@ -1,6 +1,6 @@
 <div style="display: block">
   <label style="color: white">Now is playing: "{{ this.currentPlayingVideo.title }}"</label>
-  <video class="media-video">
-    <source [src]="videoSourceUrl" >
+  <video loop autoplay muted class="media-video">
+    <source src="http://vjs.zencdn.net/v/oceans.mp4" >
   </video>
 </div>

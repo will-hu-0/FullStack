@@ -15,3 +15,10 @@ ng serve
 
 # Open the browser http://localhost:4200
 ```
+
+# Demo
+
+![Screenshot](assets/Player_Demo.png "Screenshot")
+
+
+![Screenshot](assets/Management_Demo.png "Screenshot")

@@ -29,6 +29,7 @@ export class ControlsComponent implements OnInit, OnDestroy {
 
     this.playerInstance = this.playerService.VideoPlayer;
     this.playerInstance.volumeDisplay = '100%'; // Default volume
+    this.playerInstance.isMuted = true;
 
     this.videoPercentageUpdateEventSubscribe = this.playerService.videoPercentageUpdateEvent
     .subscribe((percentage: number) => {
