@@ -5,14 +5,35 @@
       <div class="form-group">
         <label style="color: white">ID:</label>
         <input type="text" class="form-control" formControlName="id" placeholder="Enter ID">
+        <div *ngIf="id.invalid && (id.dirty || id.touched)" class="alert alert-danger">
+          <div *ngIf="id.errors.required">
+            ID is required
+          </div>
+          <div *ngIf="id.errors.pattern">
+            ID should be number
+          </div>
+        </div>            
       </div>  
       <div class="form-group">
         <label style="color: white">Title:</label>
         <input type="text" class="form-control" formControlName="title" placeholder="Enter Title">
+        <div *ngIf="title.invalid && (title.dirty || title.touched)" class="alert alert-danger">
+          <div *ngIf="title.errors.required">
+            Title is required
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label style="color: white">Youtube URL:</label>
-        <input type="url" class="form-control" formControlName="url" placeholder="Enter URL">
+        <input type="url" class="form-control" formControlName="url" autocomplete="off" placeholder="Enter URL">
+        <div *ngIf="url.invalid && (url.dirty || url.touched)" class="alert alert-danger">
+          <div *ngIf="url.errors.required">
+            URL is required
+          </div>
+          <div *ngIf="url.errors.pattern">
+            URL is invalid
+          </div>
+        </div>        
       </div>
       <button type="submit" class="btn btn-primary">Add Video</button>
     </form>
