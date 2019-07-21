@@ -1,0 +1,39 @@
+body {
+  background-color:#333;
+}
+
+.playerWrapper {
+  display: block;
+}
+
+.controllerWrapper {
+  display: block;
+}
+
+h2 {
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.volumeText {
+  color: white; margin-left: 10px;
+}
+
+.likeUnlike {
+  margin-left: 5px
+}
+
+.playlistItem {
+  margin-right: 2em;
+}
+
+.media-video {
+	width: 800px;
+}
+
+.media-player {
+	float:left;
+	padding:1em 1em;
+	height: 700px;
+}

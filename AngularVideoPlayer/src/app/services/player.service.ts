@@ -10,17 +10,17 @@ export class PlayerService {
   /**
    * Handling control events
    */
-  @Output() controlEvents: EventEmitter<PlayerEvent> = new EventEmitter();
+  controlEvents: EventEmitter<PlayerEvent> = new EventEmitter();
 
   /**
    * Handling percentage update event during playing video.
    */
-  @Output() videoPercentageUpdateEvent: EventEmitter<number> = new EventEmitter();
+  videoPercentageUpdateEvent: EventEmitter<number> = new EventEmitter();
 
   /**
    * Handling switching video event
    */
-  @Output() switchVideoEvent: EventEmitter<Video> = new EventEmitter();
+  switchVideoEvent: EventEmitter<Video> = new EventEmitter();
 
   constructor() { }
 
