@@ -8,10 +8,19 @@ class Playerlist extends React.Component {
     this.state = {
       videos: []
     }
-    // this.onPlay = this.onPlay.bind(this)
   }
   
   componentWillMount() {
+    this.getVideos();
+    // Listen to the event from (adding/removing/editing videos)
+    this.eventEmitter = emitter.addListener("onRefreshVideos", (videos) => {
+      this.setState({
+        videos: videos
+      })
+    })
+  }
+
+  getVideos() {
     videoService.getVideos()
     .then(response => response.json())
     .then(videos => {

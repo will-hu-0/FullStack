@@ -12,4 +12,7 @@ json-server -p 4000 db.json
 
 # Start the app
 npm start
+# Open localhost:3000
 ```
+# Demo
+![Screenshot](assets/demo.png "Screenshot")

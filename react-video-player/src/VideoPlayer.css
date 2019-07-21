@@ -2,18 +2,18 @@ body {
   background-color:#333;
 }
 
+h2 {
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .playerWrapper {
   display: block;
 }
 
 .controllerWrapper {
   display: block;
-}
-
-h2 {
-  color: white;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .volumeText {
@@ -36,4 +36,22 @@ h2 {
 	float:left;
 	padding:1em 1em;
 	height: 700px;
+}
+
+/* management page*/
+.management {
+  background-color:#F0F0F0;
+  padding: 30px;
+}
+
+label {
+  color: white;
+}
+
+.actions-container {
+  display: flex;
+}
+
+.action {
+  margin-right: 10px;
 }
