@@ -2,6 +2,9 @@
 
 Salary prediction reports
 
+Git URL:
+https://github.com/keenkit/FullStack/tree/master/SalaryPredictor
+
 ## Demo
 
 ```bash

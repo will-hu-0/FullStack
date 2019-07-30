@@ -11,3 +11,7 @@ https://github.com/keenkit/FullStack/tree/master/AngularVideoPlayer
 
 For UI Assignment 3:
 https://github.com/keenkit/FullStack/tree/master/react-video-player
+
+For UI Assignment 4:
+https://github.com/keenkit/FullStack/tree/master/SalaryPredictor
+
