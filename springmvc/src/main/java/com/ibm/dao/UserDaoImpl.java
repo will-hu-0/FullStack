@@ -31,7 +31,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> findAllUsers() {
-        List<User> result = jdbcTemplate.query("select * from tbl_user", new RowMapper<User>() {
+        List<User> result = jdbcTemplate.query("select * from tb_user", new RowMapper<User>() {
             @Override
             public User mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return getUser(rs);
@@ -43,12 +43,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User findByUsername(String username) {
-        String sql = "select * from tbl_user where username=?";
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("sql: {}", sql);
-            logger.debug("data: {}", username);
-        }
+        String sql = "select * from tb_user where username=?";
 
         User result = jdbcTemplate.query(sql, new ResultSetExtractor<User>() {
             @Override
@@ -80,11 +75,6 @@ public class UserDaoImpl implements UserDao {
         final String sql = "insert into tb_user(name,email,username,password,admin) values (?,?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("sql: {}", sql);
-            logger.debug("data: {}", user);
-        }
-
         jdbcTemplate.update(new PreparedStatementCreator() {
 
             @Override
@@ -99,21 +89,12 @@ public class UserDaoImpl implements UserDao {
             }
         }, keyHolder);
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("keyholder: {}", keyHolder.getKeys());
-        }
-
         return user;
     }
 
     @Override
     public void updateUser(User user) {
-        String sql = "update tbl_user set name=?,email=?,username=?,password=?,admin=? where user_id=?";
-
-        if (logger.isDebugEnabled()) {
-            logger.debug("sql: {}", sql);
-            logger.debug("data: {}", user);
-        }
+        String sql = "update tb_user set name=?,email=?,username=?,password=?,admin=? where user_id=?";
 
         List<Object> params = new ArrayList<>();
         params.add(user.getName());
