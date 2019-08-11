@@ -15,3 +15,5 @@ https://github.com/keenkit/FullStack/tree/master/react-video-player
 For UI Assignment 4:
 https://github.com/keenkit/FullStack/tree/master/SalaryPredictor
 
+For UI Assignment 5:
+https://github.com/keenkit/FullStack/tree/master/springmvc
