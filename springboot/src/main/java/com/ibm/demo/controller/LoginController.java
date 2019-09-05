@@ -2,17 +2,20 @@ package com.ibm.demo.controller;
 
 import com.ibm.demo.domain.User;
 import com.ibm.demo.exception.UserExistException;
+import com.ibm.demo.exception.UserNotExistException;
 import com.ibm.demo.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+@Controller
 public class LoginController extends BaseController {
     final static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
@@ -41,10 +45,26 @@ public class LoginController extends BaseController {
         }
 
         model.addAttribute("errorMessage", errorMessage);
-
         logger.debug("error message is {}", errorMessage);
-
         return "login";
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity doLogin(@RequestParam(name = "kaptcha") String kaptcha,
+                                  User user, HttpSession session) {
+        try {
+            validateCaptcha(kaptcha, session);
+
+            User existingUser = userService.findByUsername(user.getUsername());
+            if (existingUser == null) {
+                throw new UserNotExistException(user.getUsername());
+            } else {
+                return new ResponseEntity(existingUser, HttpStatus.OK);
+            }
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping(value = "/logout")
@@ -57,14 +77,17 @@ public class LoginController extends BaseController {
     }
 
     @GetMapping("/register")
-    public String register() {
-        return "registeration";
+    public String register(@RequestParam(value = "error", required = false) String error, Model model) {
+        model.addAttribute("errorMessage", error);
+        logger.debug("error message is {}", error);
+        return "register";
     }
 
-    @PostMapping("/register")
-    @ResponseBody
-    public ResponseEntity doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha,
-                                     @Valid @RequestBody User user, HttpSession session) {
+    @RequestMapping(value = "/register", method = RequestMethod.POST,
+        consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    public String doRegister(@RequestParam(name = "kaptcha", required = true) String kaptcha,
+                                     User user, HttpSession session) {
         try {
             validateCaptcha(kaptcha, session);
 
@@ -72,12 +95,11 @@ public class LoginController extends BaseController {
             if (existingUser != null) {
                 throw new UserExistException(user.getUsername());
             }
-
             userService.saveUser(user);
-            return new ResponseEntity(user, HttpStatus.CREATED);
+            return "login";
         } catch (Exception ex) {
             logger.error(ex.getMessage());
-            return new ResponseEntity(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return "register?error=" + ex.getMessage();
         }
     }
 }

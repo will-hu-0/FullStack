@@ -16,17 +16,18 @@
         <hr/>
     </div>
 
-    <div class="form-signin col-12">
+<!--    <div class="form-signin col-12">-->
+    <form method="POST" th:action="@{/login}" class="form-signin col-12">
         <div class="form-group row">
-            <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="inputUsername" placeholder="Enter username">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter username">
             </div>
         </div>
         <div class="form-group row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword" placeholder="Enter password">
+                <input type="password" class="form-control" id="password" name="password"  placeholder="Enter password">
             </div>
         </div>
         <div class="form-group row">
@@ -38,16 +39,16 @@
                 </a>
             </div>
             <div class="col-sm-6">
-                <input class="form-control captcha-input" name="kaptcha" id="kaptcha" class="form-control"
+                <input class="form-control captcha-input" name="kaptcha" id="kaptcha"
                        placeholder="Enter Captcha" required="" autocomplete="off">
             </div>
         </div>
         <div class="form-group row">
             <div class="col-sm-6">
-                <button class="btn btn-lg btn-primary btn-block" onclick="login()">Submit</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
             </div>
             <div class="col-sm-6">
-                <button class="btn btn-lg btn-primary btn-block" onclick="resetLoginForm()">Reset</button>
+                <button class="btn btn-lg btn-primary btn-block" onclick="reset()">Reset</button>
             </div>
         </div>
         <div class="form-group row">
@@ -56,12 +57,10 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="alert alert-success" style="display: none" id="successMessage" role="alert">
-            </div>
-            <div class="alert alert-danger" style="display: none" id="exceptionMessage" role="alert">
-            </div>
+            <div class="alert alert-danger" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
         </div>
-    </div>
+    </form>
+<!--    </div>-->
 
 </div> <!-- /container -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -74,44 +73,11 @@
     function refreshCaptcha() {
         $(".captcha-image").attr("src", "captcha_image?ts=" + Date.now());
     }
-    function login() {
-        $('#successMessage').html('');
-        $('#exceptionMessage').html('');
-        var data = {
-            username : $('#inputUsername').val(),
-            password : $('#inputPassword').val()
-        };
-        $.ajax({
-            type : "POST",
-            contentType : "application/json",
-            url : "/login?kaptcha=" + $('#kaptcha').val(),
-            data : JSON.stringify(data),
-            dataType : 'json',
-        }).done(function(res) {
-            $('#successMessage').html("Login is successful. <br>It will direct to the home page very soon...");
-            $('#successMessage').show();
-            countDownTimer = window.setInterval(countDownAndRedirect, 1000);
-        }).fail(function(res) {
-            console.log(res);
-            $('#exceptionMessage').html("Exception happened: " + res.responseText);
-            $('#exceptionMessage').show();
-        })
-    }
-    function countDownAndRedirect() {
-        countDownNumber -= 1;
-        $('#successMessage').html("Login is successful."
-            + " <br>It will direct to the home page very soon (" + countDownNumber+ ")...");
-        if (countDownNumber <= 0) {
-            window.clearInterval(countDownTimer);
-            window.location.href = "/home";
-        }
-    }
+
     function reset() {
-        $('#inputUsername').val('');
-        $('#inputPassword').val('');
+        $('#username').val('');
+        $('#password').val('');
         $('#kaptcha').val('');
-        $('#exceptionMessage').html('');
-        $('#exceptionMessage').hide();
     }
 </script>
 </body>

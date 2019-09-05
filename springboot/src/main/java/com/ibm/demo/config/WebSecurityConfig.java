@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // form based authentication is supported
             .formLogin()
             .loginPage("/login")
-            .defaultSuccessUrl("/", true)
+            .defaultSuccessUrl("/user", true)
 
             // we need to instruct Spring Security to allow anyone to access the /login URL
             .permitAll()
