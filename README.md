@@ -17,3 +17,6 @@ https://github.com/keenkit/FullStack/tree/master/SalaryPredictor
 
 For UI Assignment 5:
 https://github.com/keenkit/FullStack/tree/master/springmvc
+
+For UI Assignment 6:
+https://github.com/keenkit/FullStack/tree/master/springboot
