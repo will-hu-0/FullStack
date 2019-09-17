@@ -20,3 +20,6 @@ https://github.com/keenkit/FullStack/tree/master/springmvc
 
 For UI Assignment 6:
 https://github.com/keenkit/FullStack/tree/master/springboot
+
+For UI Assignment 7:
+https://github.com/keenkit/FullStack/tree/master/007Mysql
