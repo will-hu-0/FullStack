@@ -22,7 +22,7 @@
     <jsp.version>2.3.1</jsp.version>
     <jettyVersion>9.3.8.v20160314</jettyVersion>
     <spring.security.version>4.2.13.RELEASE</spring.security.version>
-    <jackson.version>2.9.9</jackson.version>
+    <jackson.version>2.13.4.1</jackson.version>
   </properties>
 
   <dependencies>
